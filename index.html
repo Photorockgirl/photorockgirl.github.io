@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+
+
+
+<style>
+#star{
+  font-size: 500%;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+</style>
+
+</head>
+
+
+<body>
+<button type="button" class="collapsible">How to Play</button>
+<div class="content">
+  <p>Choose the amount of stars to play with, then each player can take either 1, 2, or 3 stars on their turn. The player to take the last star wins. What patterns do you see? Is there a way to always win when you are first player? What about second player? Have fun!</p>
+</div>
+
+
+<div style= "text-align: center;"> 
+
+First Player Color : <div style="color:turquoise;overflow:hidden">Blue (Single Click)</div>
+<br/>
+<br/>
+Second Player Color: <div style="color:orangered;overflow:hidden">Orange (Double Click)</div>
+
+<div id="outerdiv"></div>
+
+
+
+  <label>Choose Stars (between 1 and 20):</label>
+  <input type="number" id="numStars" min="1" max="20">
+  <button onclick="inputStars()">Play</button>
+</div>
+</body>
+
+<script>
+	function outerdiv() { 
+      $('#outerdiv').append('<span id="star">&#128970;</span>');
+      
+    }
+    
+	function changeColor(){
+		var shapes = document.querySelectorAll("#star");
+		Array.prototype.forEach.call(shapes, function(x){
+ 			x.addEventListener("click", function(){
+  				if ( x.style.color == "paleturquoise" ) {
+      				x.style.color = "orangered";
+    			} else if ( x.style.color == "orangered" ) {
+      				x.style.color = "white";
+    			} else { //else it's white
+      				x.style.color = "paleturquoise";
+    			}
+  			});
+		});
+	}
+	
+	function generateStars(numberOfStars){
+    	 $('#outerdiv').empty();
+		for (let i = 0; i <numberOfStars; i++) {
+			if (i=== 20){
+				break;
+			}
+			outerdiv();
+    	}
+		changeColor() 
+    }
+
+	function inputStars(){
+    	//First find the num of stars
+    	numStars= document.getElementById("numStars").value; 
+    	//Generate this many
+    	generateStars(numStars)
+    }
+    
+	generateStars(6)
+</script>
+
+</html>
